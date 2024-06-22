@@ -3,6 +3,7 @@ const usersCtrl = require('../controllers/userController.js');
 
 const router = Router();
 
-router.post('/', usersCtrl.createUser);
+// Route for user registration
+router.post('/register', usersCtrl.createUser);
 
 module.exports = router;
