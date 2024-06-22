@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 8000;
 // Requiring example router
 const userRouter = require('./routes/userRoutes.js');
 const postRouter = require('./routes/postRoutes.js');
+const commentRouter = require('./routes/commentRoutes.js');
 
 const errorHandler = require('./middleware/error.js');
 
@@ -24,6 +25,7 @@ app.use((req, res, next) => {
 // Connecting the router to the server
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/posts', postRouter);
+app.use('/api/v1/comments', commentRouter);
 
 // Catch-all route handler
 app.all('*', (req, res) => {
