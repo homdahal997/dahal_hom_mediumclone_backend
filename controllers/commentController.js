@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 
 module.exports = {
     createComment,
+    getComments,
+    getCommentById,
 };
 
 async function createComment(req, res, next) {
@@ -35,6 +37,27 @@ async function createComment(req, res, next) {
         await comment.save();
 
         res.status(201).json(comment);
+    } catch (err) {
+        next(err);
+    }
+}
+
+// Get comments 
+async function getComments(req, res) {
+    try {
+        const comments = await Comment.find({});
+
+        res.status(200).json(comments);
+    } catch (err) {
+        res.status(400).send(err);
+    }
+}
+
+// Get a single comment by ID
+async function getCommentById(req, res, next) {
+    try {
+        const comment = await Comment.findById(req.params.id);
+        res.status(200).json(comment);
     } catch (err) {
         next(err);
     }
