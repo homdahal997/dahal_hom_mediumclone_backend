@@ -5,5 +5,6 @@ const router = Router();
 
 // Route for user registration
 router.post('/register', usersCtrl.createUser);
+router.get('/', usersCtrl.getUsers);
 
 module.exports = router;
