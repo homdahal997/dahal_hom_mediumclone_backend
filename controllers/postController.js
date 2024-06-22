@@ -6,6 +6,7 @@ module.exports = {
     createPost,
     getPosts,
     getPostById,
+    updatePost,
 };
 
 // Create post 
@@ -55,5 +56,18 @@ async function getPostById(req, res, next) {
         res.status(200).json(post);
     } catch (err) {
         next(err);
+    }
+}
+
+// Update a single posy by ID
+async function updatePost(req, res) {
+    try {
+        const updatedPost = await Post.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+        });
+
+        res.status(200).json(updatedPost);
+    } catch (err) {
+        res.status(400).send(err);
     }
 }
