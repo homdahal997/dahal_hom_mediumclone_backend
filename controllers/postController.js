@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 module.exports = {
     createPost,
+    getPosts
 };
 
 // Create post 
@@ -32,5 +33,16 @@ async function createPost(req, res, next) {
         res.status(201).json(post);
     } catch (err) {
         next(err);
+    }
+}
+
+// Get posts 
+async function getPosts(req, res) {
+    try {
+        const posts = await Post.find({});
+
+        res.status(200).json(posts);
+    } catch (err) {
+        res.status(400).send(err);
     }
 }
