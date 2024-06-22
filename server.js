@@ -23,6 +23,10 @@ app.use((req, res, next) => {
 // Connecting the router to the server
 app.use('/api/v1/users', userRouter);
 
+// Catch-all route handler
+app.all('*', (req, res) => {
+  res.status(404).json({Error : 'The requested resource was not found on this server.'});
+});
 
 // Error Handling Middlware
 app.use(errorHandler);
