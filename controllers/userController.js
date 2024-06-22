@@ -4,6 +4,7 @@ const User = require('../models/UserModel.js');
 module.exports = {
   createUser,
   getUsers,
+  updateUser,
 };
 
 async function createUser(req, res, next) {
@@ -34,6 +35,26 @@ async function getUsers(req, res, next) {
     const users = await User.find({});
 
     res.status(200).json(users);
+  } catch (err) {
+    next(err);
+  }
+}
+
+
+
+// Update a single user by ID
+async function updateUser(req, res, next) {
+  try {
+    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json(user);
   } catch (err) {
     next(err);
   }
