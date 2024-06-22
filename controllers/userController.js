@@ -3,6 +3,7 @@ const User = require('../models/UserModel.js');
 
 module.exports = {
   createUser,
+  getUsers,
 };
 
 async function createUser(req, res, next) {
@@ -24,5 +25,16 @@ async function createUser(req, res, next) {
     res.status(200).json(user);
   } catch (err) {
     next(err)
+  }
+}
+
+//Get all users
+async function getUsers(req, res, next) {
+  try {
+    const users = await User.find({});
+
+    res.status(200).json(users);
+  } catch (err) {
+    next(err);
   }
 }
