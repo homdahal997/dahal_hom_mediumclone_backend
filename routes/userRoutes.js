@@ -6,7 +6,7 @@ const router = Router();
 // Route for user registration
 router.post('/register', usersCtrl.createUser);
 router.get('/', usersCtrl.getUsers);
-
+router.get('/:id', usersCtrl.getUserById);
 router.put('/:id', usersCtrl.updateUser);
 
 module.exports = router;
