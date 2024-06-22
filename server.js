@@ -31,10 +31,10 @@ app.all('*', (req, res) => {
 // Error Handling Middlware
 app.use(errorHandler);
 
-// Error Handling Middlware
-app.use((err, req, res, next) => {
-  res.status(500).send('Something went wrong.');
-});
+// // Error Handling Middlware
+// app.use((err, req, res, next) => {
+//   res.status(500).send('Something went wrong.');
+// });
 
 // Calling the listen function telling the server to listen on port 3000
 app.listen(PORT, () => {

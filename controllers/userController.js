@@ -13,10 +13,10 @@ async function createUser(req, res, next) {
 
     // Create a new user with the hashed password
     const newUser = {
-      username: req.body.username,
+      name: req.body.username, 
       email: req.body.email,
-      password: hashedPassword,
-      type: req.body.type
+      password: req.body.password, 
+      isAdmin: req.body.isAdmin || false,
     };
     const user = await User.create(newUser);
     //await user.save();
