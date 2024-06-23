@@ -11,6 +11,7 @@ module.exports = {
   deleteUser,
   getUserProfile,
   updateUserProfile,
+  logoutUser,
 };
 
 async function createUser(req, res, next) {
@@ -144,3 +145,9 @@ async function updateUserProfile(req, res, next) {
     next(err);
   }
 }
+
+// logout user 
+async function logoutUser(req, res){
+  res.clearCookie('jwt');
+  res.status(200).json({ message: 'Logged out successfully' });
+};
