@@ -110,7 +110,6 @@ async function deleteUser(req, res, next) {
 
 async function getUserProfile(req, res, next) {
   try {
-    // req.user.id is set from the authentication middleware
     const user = await User.findById(req.user._id).select('-password'); // Exclude password from the result
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
