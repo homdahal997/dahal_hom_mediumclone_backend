@@ -4,6 +4,7 @@ require('dotenv').config();
 const express = require('express');
 // Creating the express server and storing inside the app variable
 const app = express();
+const cors = require('cors');
 // Port in which the server will run on
 const PORT = process.env.PORT || 8000;
 // Requiring example router
@@ -12,6 +13,9 @@ const postRouter = require('./routes/postRoutes.js');
 const commentRouter = require('./routes/commentRoutes.js');
 
 const errorHandler = require('./middleware/error.js');
+
+// Middleware to enable CORS
+app.use(cors());
 
 // Configuring the server to accept and parse JSON data.
 app.use(express.json());

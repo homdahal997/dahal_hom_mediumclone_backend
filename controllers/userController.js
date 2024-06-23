@@ -9,6 +9,8 @@ module.exports = {
   updateUser,
   getUserById,
   deleteUser,
+  getUserProfile,
+  updateUserProfile,
 };
 
 async function createUser(req, res, next) {
@@ -94,13 +96,51 @@ async function updateUser(req, res, next) {
 // Delete a single user by ID
 async function deleteUser(req, res, next) {
   try {
-    const user = await User.findByIdAndDelete(req.params.id);
+    const user = await User.findByIdAndDelete(req.params._id);
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
 
     res.status(200).json({ message: 'User deleted successfully' });
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function getUserProfile(req, res, next) {
+  try {
+    // req.user.id is set from the authentication middleware
+    const user = await User.findById(req.user._id).select('-password'); // Exclude password from the result
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json(user);
+  } catch (err) {
+    next(err);
+  }
+}
+
+// Update the profile of the currently authenticated user
+async function updateUserProfile(req, res, next) {
+  try {
+    // Allow updates to name and email only for simplicity
+    const updates = {
+      name: req.body.name,
+      email: req.body.email,
+    };
+
+    // req.user.id is set from the authentication middleware
+    const user = await User.findByIdAndUpdate(req.user.id, updates, {
+      new: true,
+      runValidators: true,
+    }).select('-password'); // Exclude password from the result
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json(user);
   } catch (err) {
     next(err);
   }
