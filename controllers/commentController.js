@@ -1,5 +1,5 @@
 const Comment = require('../models/commentModel.js')
-const User = require('../models/UserModel.js');
+const User = require('../models/userModel.js');
 const Post = require('../models/postModel.js')
 const mongoose = require('mongoose');
 

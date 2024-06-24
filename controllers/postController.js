@@ -1,5 +1,5 @@
 const Post = require('../models/postModel')
-const User = require('../models/UserModel.js');
+const User = require('../models/userModel.js');
 const mongoose = require('mongoose');
 
 module.exports = {
