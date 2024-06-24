@@ -18,14 +18,14 @@ async function createUser(req, res, next) {
   try {
     // Hash the password before saving the user
     const { username, email, password, isAdmin } = req.body;
-    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
     // Create a new user with the hashed password
     const newUser = {
-      name: req.body.username, 
-      email: req.body.email,
-      password: req.body.password, 
-      isAdmin: req.body.isAdmin || false,
+      name: username, 
+      email: email,
+      password: hashedPassword, 
+      isAdmin: isAdmin || false,
     };
     const user = await User.create(newUser);
     
